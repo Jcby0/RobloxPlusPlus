@@ -50,8 +50,8 @@ class Application:
             self.root.maxsize(self.Width, self.Height)
             self.root.minsize(self.Width, self.Height)
 
-main = Application("Roblox++", 150, 100)
-
+main = Application("", 200, 100)
+main.root.iconbitmap("Assets/rblx.ico")
 
 # Fps Cap
 main.fpsCap = ttk.LabeledScale(main.root, variable=None, from_=1, to=999, padding=2)
