@@ -51,9 +51,6 @@ class Application:
             self.root.maxsize(self.Width, self.Height)
             self.root.minsize(self.Width, self.Height)
 
-    def getWindow(self) -> tkinter.Tk:
-        return self.root
-
 main = Application("Roblox++", 400, 300)
 
 
