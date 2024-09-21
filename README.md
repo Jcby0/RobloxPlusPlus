@@ -1,27 +1,22 @@
-# Project Title
+# Roblox++
 
 Roblox++ is a multi-os Roblox enhancement.  The goal is to make your Roblox experience more enjoyable.
-
-## Description
-
-An in-depth paragraph about your project and overview of use.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Be on a mac or windows.
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Click on releases to install the latest version.
+* Install the proper file based on your platform.
 
 ### Executing program
 
 * How to run the program
-* Step-by-step bullets
+* Simply click on the file
 ```
 code blocks for commands
 ```
