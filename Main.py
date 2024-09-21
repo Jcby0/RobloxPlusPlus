@@ -30,6 +30,8 @@ File.createCustomDir()
 if File.robloxDirExists():
     File.createClientSettings()
 
+File.downloadAssets()
+
 # Application Class
 
 class Application:
@@ -51,7 +53,12 @@ class Application:
             self.root.minsize(self.Width, self.Height)
 
 main = Application("", 200, 100)
-main.root.iconbitmap("Assets/rblx.ico")
+
+# Set Icon
+if Constants.IS_WINDOWS:
+    main.root.iconbitmap(f"{Constants.WINDOWS_PATH}\\rblx.ico")
+else:
+    main.root.iconbitmap(f"{Constants.MAC_OS_PATH}/rblx.ico")
 
 # Fps Cap
 main.fpsCap = ttk.LabeledScale(main.root, variable=None, from_=1, to=999, padding=2)
