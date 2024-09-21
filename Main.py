@@ -30,7 +30,6 @@ File.createCustomDir()
 if File.robloxDirExists():
     File.createClientSettings()
 
-
 # Application Class
 
 class Application:
@@ -51,26 +50,18 @@ class Application:
             self.root.maxsize(self.Width, self.Height)
             self.root.minsize(self.Width, self.Height)
 
-main = Application("Roblox++", 400, 300)
-
-
-def setFPS():
-    FPS.setClientFPS(FPS.fps)
-
-def updateFPS(percentage):
-    FPS.calculateFPS(float(percentage)/1000)
-
-# FPS Button
-
-main.fpsBtn = ttk.Button(main.root, text="Set FPS Cap", command=setFPS)
-main.fpsBtn.grid(column=1, row=4)
+main = Application("Roblox++", 150, 100)
 
 
 # Fps Cap
 main.fpsCap = ttk.LabeledScale(main.root, variable=None, from_=1, to=999, padding=2)
-main.fpsCap.grid(column=1, row=2)
-main.fpsCap.scale.config(command=updateFPS)
-main.fpsCap.value = FPS.getFPSFromFile() or 60
+main.fpsCap.pack()
+main.fpsCap.scale.config(command=FPS.calculateFPS)
+main.fpsCap.value = FPS.getFPSFromFile() or 60 # load in fps from file
+
+# FPS Button
+main.fpsBtn = ttk.Button(main.root, text="Set FPS Cap", command=FPS.setClientFPS, style="")
+main.fpsBtn.pack()
 
 # Set the theme of window
 sv_ttk.set_theme("dark")
