@@ -1,13 +1,15 @@
-# TODO #1
-# Macos path
-# Add FPS Class/Finish it
-#
+# Add FPS Class/Finish it TODO
 # TODO #2
 # Asset editing
 # Research other client settings etc
 # Do own research by searching roblox files
 # Find a operating sytem friendly file extension or do .exe and some other one for mac
 #
+
+# Resources
+#  https://github.com/MaximumADHD/Roblox-FFlag-Tracker/tree/main
+#  https://github.com/catb0x/Roblox-Potato-FFlags
+#  Potato mode idea
 
 
 # Imports
@@ -18,6 +20,16 @@ import tkinter.font
 import sv_ttk
 from FPS.FPSManager import FPS
 import Constants
+import FileManager.File as File
+
+
+# Check Files
+
+File.createCustomDir()
+
+if File.robloxDirExists():
+    File.createClientSettings()
+
 
 # Application Class
 
@@ -45,21 +57,23 @@ class Application:
 main = Application("Roblox++", 400, 300)
 
 
+def setFPS():
+    FPS.setClientFPS(FPS.fps)
+
+def updateFPS(percentage):
+    FPS.calculateFPS(float(percentage)/1000)
 
 # FPS Button
 
-main.fpsBtn = ttk.Button(main.root, text="Set FPS Cap", command=None)
+main.fpsBtn = ttk.Button(main.root, text="Set FPS Cap", command=setFPS)
 main.fpsBtn.grid(column=1, row=4)
 
-def updateFPS(percentage):
-    fps = FPS.calculateFPS(float(percentage)/1000)
-    print(fps)
 
 # Fps Cap
-main.fpsCap = ttk.LabeledScale(main.root, variable=None, from_=30, to=999, padding=2)
+main.fpsCap = ttk.LabeledScale(main.root, variable=None, from_=1, to=999, padding=2)
 main.fpsCap.grid(column=1, row=2)
 main.fpsCap.scale.config(command=updateFPS)
-
+main.fpsCap.value = FPS.getFPSFromFile() or 60
 
 # Set the theme of window
 sv_ttk.set_theme("dark")

@@ -19,6 +19,6 @@ MAC_OS_PATH=f"{os.path.expanduser("~/Documents/RobloxPlusPlus")}"
 WINDOWS_PATH=f"{os.getenv("APPDATA")}\\RobloxPlusPlus"
 
 WINDOWS_ROBLOX_PATH="WIP"
-MAC_OS_ROBLOX_PATH="WIP"
+MAC_OS_ROBLOX_PATH="/Applications/Roblox.app/Contents/MacOS"
 
 MAX_FPS=1000
