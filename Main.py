@@ -1,8 +1,5 @@
 # TODO #1
-# Positioning items in frame
-# Cleaner UI
 # Macos path
-# Differentiate systems
 # Add FPS Class/Finish it
 #
 # TODO #2
@@ -17,7 +14,10 @@
 
 import tkinter
 from tkinter import ttk
+import tkinter.font
 import sv_ttk
+from FPS.FPSManager import FPS
+import Constants
 
 # Application Class
 
@@ -35,6 +35,7 @@ class Application:
         self.root.title(self.Name)
         self.root.geometry(f"{self.Width}x{self.Height}")
         if not self.Resizable:
+            self.root.resizable(0, 0)
             self.root.maxsize(self.Width, self.Height)
             self.root.minsize(self.Width, self.Height)
 
@@ -43,13 +44,22 @@ class Application:
 
 main = Application("Roblox++", 400, 300)
 
-# Label
-main.fpsLabel = ttk.Label(main.root, text="FPS Cap")
-main.fpsLabel.pack()
+
+
+# FPS Button
+
+main.fpsBtn = ttk.Button(main.root, text="Set FPS Cap", command=None)
+main.fpsBtn.grid(column=1, row=4)
+
+def updateFPS(percentage):
+    fps = FPS.calculateFPS(float(percentage)/1000)
+    print(fps)
 
 # Fps Cap
-main.fpsCap = ttk.Scale(main.root)
-main.fpsCap.pack()
+main.fpsCap = ttk.LabeledScale(main.root, variable=None, from_=30, to=999, padding=2)
+main.fpsCap.grid(column=1, row=2)
+main.fpsCap.scale.config(command=updateFPS)
+
 
 # Set the theme of window
 sv_ttk.set_theme("dark")
