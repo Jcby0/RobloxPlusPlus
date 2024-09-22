@@ -14,13 +14,11 @@
 
 # Imports
 
-import tkinter
-from tkinter import ttk
-import tkinter.font
-import sv_ttk
 from FPS.FPSManager import FPS
 import Constants
 import FileManager.File as File
+import customtkinter
+import time
 
 
 # Check Files
@@ -44,7 +42,7 @@ class Application:
         self.createWindow()
     
     def createWindow(self) -> None:
-        self.root = tkinter.Tk(self.Name)
+        self.root = customtkinter.CTk()
         self.root.title(self.Name)
         self.root.geometry(f"{self.Width}x{self.Height}")
         if not self.Resizable:
@@ -52,7 +50,7 @@ class Application:
             self.root.maxsize(self.Width, self.Height)
             self.root.minsize(self.Width, self.Height)
 
-main = Application("", 200, 100)
+main = Application("", 300, 100)
 
 # Set Icon
 if Constants.IS_WINDOWS:
@@ -61,17 +59,30 @@ else:
     main.root.iconbitmap(f"{Constants.MAC_OS_PATH}/rblx.ico")
 
 # Fps Cap
-main.fpsCap = ttk.LabeledScale(main.root, variable=None, from_=1, to=999, padding=2)
-main.fpsCap.pack()
-main.fpsCap.scale.config(command=FPS.calculateFPS)
-main.fpsCap.value = FPS.getFPSFromFile() or 60 # load in fps from file
+
+main.fpsLabel = customtkinter.CTkLabel(main.root, text=f"FPS")
+main.fpsLabel.grid(column=1, row=1, padx=20)
+
+main.fpsCap = customtkinter.CTkTextbox(main.root, width=60, height=5, wrap="none", activate_scrollbars=False)
+main.fpsCap.grid(column=2, row=1, pady=10)
+
+# Loading From File
+loadedFPS = FPS.getFPSFromFile()
+main.fpsCap.insert("1.0", f"{loadedFPS}")
+
+def setClientFPS() -> None:
+
+    fps = str(main.fpsCap.get("1.0", "1.end"))
+    
+    if fps.isnumeric():
+        FPS.setClientFPS(fps)
+    else:
+        main.fpsCap.delete("1.0", "1.end")
+        main.fpsCap.insert("1.0", "Invalid Number")
 
 # FPS Button
-main.fpsBtn = ttk.Button(main.root, text="Set FPS Cap", command=FPS.setClientFPS, style="")
-main.fpsBtn.pack()
-
-# Set the theme of window
-sv_ttk.set_theme("dark")
+main.fpsBtn = customtkinter.CTkButton(main.root, text="Set FPS Cap", command=setClientFPS)
+main.fpsBtn.grid(column=3, row=1, padx=20)
 
 # Run the loop (keep window open)
 main.root.mainloop()

@@ -16,12 +16,16 @@ class FPS:
         if Constants.IS_WINDOWS:
             with open(f"{Constants.WINDOWS_ROBLOX_PATH}\\ClientSettings\\ClientAppSettings.json", "r") as f:
                 try:
-                    return json.load(f)["DFIntTaskSchedulerTargetFps"]
-                except:
+                    FPS.fps = json.load(f)["DFIntTaskSchedulerTargetFps"]
+                    print(FPS.fps)
+                    return FPS.fps
+                except Exception as e:
+                    print(e)
                     return None
         else:
             with open(f"{Constants.MAC_OS_ROBLOX_PATH}/ClientSettings/ClientAppSettings.json", "r") as f:
                 try:
+                    FPS.fps = json.load(f)["DFIntTaskSchedulerTargetFps"]
                     return json.load(f)["DFIntTaskSchedulerTargetFps"]
                 except:
                     return None
@@ -40,7 +44,10 @@ class FPS:
                 except:
                     return None
 
-    def setClientFPS():
+    def setClientFPS(fps=0):
+        if fps != 0:
+            FPS.fps = fps
+
         data = FPS.getJSONFromFile()
 
         data["DFIntTaskSchedulerTargetFps"] = FPS.fps
