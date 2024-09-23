@@ -1,6 +1,7 @@
-# Add FPS Class/Finish it TODO
-# TODO #2
+# TODO 
 # Asset editing
+# * Edit roblox icon in taskbar (will need to add assets)
+#   * Add multiple options (dropdown)
 # Research other client settings etc
 # Do own research by searching roblox files
 # Find a operating sytem friendly file extension or do .exe and some other one for mac
@@ -18,8 +19,6 @@ from FPS.FPSManager import FPS
 import Constants
 import FileManager.File as File
 import customtkinter
-import time
-
 
 # Check Files
 
@@ -50,7 +49,7 @@ class Application:
             self.root.maxsize(self.Width, self.Height)
             self.root.minsize(self.Width, self.Height)
 
-main = Application("", 300, 100)
+main = Application("", 290, 100)
 
 # Set Icon
 if Constants.IS_WINDOWS:
@@ -60,8 +59,8 @@ else:
 
 # Fps Cap
 
-main.fpsLabel = customtkinter.CTkLabel(main.root, text=f"FPS")
-main.fpsLabel.grid(column=1, row=1, padx=20)
+main.fpsLabel = customtkinter.CTkLabel(main.root, text=f"FPS Cap")
+main.fpsLabel.grid(column=1, row=1, padx=10)
 
 main.fpsCap = customtkinter.CTkTextbox(main.root, width=60, height=5, wrap="none", activate_scrollbars=False)
 main.fpsCap.grid(column=2, row=1, pady=10)
@@ -82,7 +81,7 @@ def setClientFPS() -> None:
 
 # FPS Button
 main.fpsBtn = customtkinter.CTkButton(main.root, text="Set FPS Cap", command=setClientFPS)
-main.fpsBtn.grid(column=3, row=1, padx=20)
+main.fpsBtn.grid(column=3, row=1, padx=10)
 
 # Run the loop (keep window open)
 main.root.mainloop()
