@@ -17,7 +17,6 @@ class FPS:
             with open(f"{Constants.WINDOWS_ROBLOX_PATH}\\ClientSettings\\ClientAppSettings.json", "r") as f:
                 try:
                     FPS.fps = json.load(f)["DFIntTaskSchedulerTargetFps"]
-                    print(FPS.fps)
                     return FPS.fps
                 except Exception as e:
                     print(e)
@@ -26,7 +25,7 @@ class FPS:
             with open(f"{Constants.MAC_OS_ROBLOX_PATH}/ClientSettings/ClientAppSettings.json", "r") as f:
                 try:
                     FPS.fps = json.load(f)["DFIntTaskSchedulerTargetFps"]
-                    return json.load(f)["DFIntTaskSchedulerTargetFps"]
+                    return FPS.fps
                 except:
                     return None
 

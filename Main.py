@@ -55,7 +55,8 @@ main = Application("", 290, 100)
 if Constants.IS_WINDOWS:
     main.root.iconbitmap(f"{Constants.WINDOWS_PATH}\\rblx.ico")
 else:
-    main.root.iconbitmap(f"{Constants.MAC_OS_PATH}/rblx.ico")
+    img = customtkinter.CTkImage(f"{Constants.MAC_OS_PATH}/rblx.ico")
+    main.root.tk.call("wm", "iconphoto", main.root._w, img)
 
 # Fps Cap
 
