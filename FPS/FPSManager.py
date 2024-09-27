@@ -14,40 +14,47 @@ class FPS:
 
     def getFPSFromFile() -> float:
         if Constants.IS_WINDOWS:
-            with open(f"{Constants.WINDOWS_ROBLOX_PATH}\\ClientSettings\\ClientAppSettings.json", "r") as f:
-                try:
-                    FPS.fps = json.load(f)["DFIntTaskSchedulerTargetFps"]
-                    return FPS.fps
-                except Exception as e:
-                    print(e)
-                    return None
+            if os.path.exists(f"{Constants.WINDOWS_ROBLOX_PATH}\\ClientSettings\\ClientAppSettings.json"):
+                with open(f"{Constants.WINDOWS_ROBLOX_PATH}\\ClientSettings\\ClientAppSettings.json", "r") as f:
+                    try:
+                        FPS.fps = json.load(f)["DFIntTaskSchedulerTargetFps"]
+                        return FPS.fps
+                    except Exception as e:
+                        print(e)
+                        return 60
         else:
-            with open(f"{Constants.MAC_OS_ROBLOX_PATH}/ClientSettings/ClientAppSettings.json", "r") as f:
-                try:
-                    FPS.fps = json.load(f)["DFIntTaskSchedulerTargetFps"]
-                    return FPS.fps
-                except:
-                    return None
+            if os.path.exists(f"{Constants.MAC_OS_ROBLOX_PATH}/MacOS/ClientSettings/ClientAppSettings.json"):
+                with open(f"{Constants.MAC_OS_ROBLOX_PATH}/MacOS/ClientSettings/ClientAppSettings.json", "r") as f:
+                    try:
+                        FPS.fps = json.load(f)["DFIntTaskSchedulerTargetFps"]
+                        return FPS.fps
+                    except:
+                        return 60
 
     def getJSONFromFile() -> dict: 
         if Constants.IS_WINDOWS:
-            with open(f"{Constants.WINDOWS_ROBLOX_PATH}\\ClientSettings\\ClientAppSettings.json", "r") as f:
-                try:
-                    return json.load(f)
-                except:
-                    return None
+            if os.path.exists(f"{Constants.WINDOWS_ROBLOX_PATH}\\ClientSettings\\ClientAppSettings.json"):
+                with open(f"{Constants.WINDOWS_ROBLOX_PATH}\\ClientSettings\\ClientAppSettings.json", "r") as f:
+                    try:
+                        return json.load(f)
+                    except:
+                        return None
         else:
-            with open(f"{Constants.MAC_OS_ROBLOX_PATH}/ClientSettings/ClientAppSettings.json", "r") as f:
-                try:
-                    return json.load(f)
-                except:
-                    return None
+            if os.path.exists(f"{Constants.MAC_OS_ROBLOX_PATH}/MacOS/ClientSettings/ClientAppSettings.json"):
+                with open(f"{Constants.MAC_OS_ROBLOX_PATH}/MacOS/ClientSettings/ClientAppSettings.json", "r") as f:
+                    try:
+                        return json.load(f)
+                    except:
+                        return None
 
     def setClientFPS(fps=0):
         if fps != 0:
             FPS.fps = fps
 
         data = FPS.getJSONFromFile()
+
+        if data == None:
+            data = {}
 
         data["DFIntTaskSchedulerTargetFps"] = FPS.fps
 

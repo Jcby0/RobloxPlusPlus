@@ -55,16 +55,15 @@ main = Application("", 290, 100)
 if Constants.IS_WINDOWS:
     main.root.iconbitmap(f"{Constants.WINDOWS_PATH}\\rblx.ico")
 else:
-    img = customtkinter.CTkImage(f"{Constants.MAC_OS_PATH}/rblx.ico")
-    main.root.tk.call("wm", "iconphoto", main.root._w, img)
+    pass
+    #main.root.iconbitmap(f"{Constants.MAC_OS_PATH}\\rblx.icns")
 
 # Fps Cap
-
 main.fpsLabel = customtkinter.CTkLabel(main.root, text=f"FPS Cap")
-main.fpsLabel.grid(column=1, row=1, padx=10)
+main.fpsLabel.grid(column=1, row=1, padx=8)
 
 main.fpsCap = customtkinter.CTkTextbox(main.root, width=60, height=5, wrap="none", activate_scrollbars=False)
-main.fpsCap.grid(column=2, row=1, pady=10)
+main.fpsCap.grid(column=2, row=1, pady=8)
 
 # Loading From File
 loadedFPS = FPS.getFPSFromFile()
@@ -82,7 +81,26 @@ def setClientFPS() -> None:
 
 # FPS Button
 main.fpsBtn = customtkinter.CTkButton(main.root, text="Set FPS Cap", command=setClientFPS)
-main.fpsBtn.grid(column=3, row=1, padx=10)
+main.fpsBtn.grid(column=3, row=1, padx=8)
+
+# Icon MACOS ONLY RN
+
+def selectFile():
+    if not Constants.IS_WINDOWS:
+        file = customtkinter.filedialog.askopenfile(filetypes=[("ICNS Icon File", "*.icns")])
+
+        with open(file.name, "rb") as f:
+            data = f.read()
+            with open(f"{Constants.MAC_OS_ROBLOX_PATH}/Resources/ApplIcon.icns", "wb") as f:
+                f.write(data)
+                print("wrote")
+
+
+main.iconText = customtkinter.CTkLabel(main.root, text=f"Roblox Icon")
+main.iconText.grid(column=1, row=2, padx=4)
+
+main.iconFile = customtkinter.CTkButton(main.root, text = "Choose file", command = selectFile)
+main.iconFile.grid(column=3, row=2)
 
 # Run the loop (keep window open)
 main.root.mainloop()
