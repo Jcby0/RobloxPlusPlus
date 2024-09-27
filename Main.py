@@ -89,11 +89,13 @@ def selectFile():
     if not Constants.IS_WINDOWS:
         file = customtkinter.filedialog.askopenfile(filetypes=[("ICNS Icon File", "*.icns")])
 
-        with open(file.name, "rb") as f:
-            data = f.read()
-            with open(f"{Constants.MAC_OS_ROBLOX_PATH}/Resources/ApplIcon.icns", "wb") as f:
-                f.write(data)
-                print("wrote")
+            
+        f = open(file.name, "rb")
+        data = f.read()
+        f.close()
+        with open(f"{Constants.MAC_OS_ROBLOX_PATH}/Resources/ApplIcon.icns", "wb") as f:
+            f.write(data)
+            print("wrote")
 
 
 main.iconText = customtkinter.CTkLabel(main.root, text=f"Roblox Icon")
