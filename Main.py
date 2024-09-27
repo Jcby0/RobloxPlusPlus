@@ -93,7 +93,7 @@ def selectFile():
         f = open(file.name, "rb")
         data = f.read()
         f.close()
-        with open(f"{Constants.MAC_OS_ROBLOX_PATH}/Resources/ApplIcon.icns", "wb") as f:
+        with open(f"{Constants.MAC_OS_ROBLOX_PATH}/Resources/AppIcon.icns", "wb") as f:
             f.write(data)
             print("wrote")
 
